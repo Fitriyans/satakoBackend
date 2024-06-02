@@ -22,7 +22,7 @@ app.use('/api', userRoute);
 // conncet database
 mongoose
   .connect(
-    "mongodb+srv://nursaidahfitria:URDxwZbzi0phPpI8@satakodb.8ftgzlo.mongodb.net/Node-API?retryWrites=true&w=majority&appName=satakoDB"
+    process.env.MONGO_URI
   )
   .then(() => {
     console.log("Connected to database!");

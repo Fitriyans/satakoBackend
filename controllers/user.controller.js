@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
-const User = require("../models/user.model.js"); // Adjust the path as needed
+const User = require("../models/user.model.js"); 
 
 const { generateAccessToken, getUserId } = require("../helpers/utility");
 
@@ -10,19 +10,19 @@ const { generateAccessToken, getUserId } = require("../helpers/utility");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "your-email@gmail.com", 
-    pass: "your-email-password",
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
   },
 });
 
 // Function to send email
 const sendResetEmail = (email, token) => {
   const mailOptions = {
-    from: "your-email@gmail.com",
+    from: process.env.EMAIL_USER,
     to: email,
     subject: "Password Reset",
     text: `You requested a password reset. Please use the following link to reset your password: 
-    http://your-domain.com/reset-password?token=${token}`,
+    http://localhost:3000/api/reset-password?token=${token}`,
   };
 
   transporter.sendMail(mailOptions, (error, info) => {
